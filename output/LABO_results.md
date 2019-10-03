@@ -1,0 +1,63 @@
+---
+title: "LABO_results"
+author: "Michael Whitby"
+date: "10/3/2019"
+output: 
+  html_document:
+    keep_md: yes
+---
+
+
+
+
+
+```r
+wmap <- suppressMessages(ggplot2::map_data('world'))
+
+myBreaks <- function(x){
+  breaks <- c(min(x),max(x))
+  names(breaks) <- attr(breaks,"labels")
+  breaks
+}
+
+map <- ggplot(LABO_df, aes(decimalLongitude, decimalLatitude, group = month)) +
+  geom_polygon(
+    aes(long, lat, group = group), fill = 'grey', colour = "black", data = wmap)+
+  stat_density_2d(aes(fill = ..level..), geom="polygon", alpha = 0.25)+
+  geom_point(size=0.1)+
+  coord_quickmap(xlim=c(-130,-60), ylim=c(10, 60) )+
+  labs(x=element_blank(), y = element_blank(), 
+       title = 'Red Bat Records',
+       fill = element_blank())+
+  # scale_fill_viridis_c(breaks = pretty_breaks(n=3),labels = c('','less', "",'more',''))+
+  scale_fill_viridis_c(breaks = myBreaks, expand=expand_scale(),labels = c('Fewer Records','More Records') )+
+  theme_minimal()+
+  theme(legend.position="bottom")
+
+# map
+
+map+
+  facet_wrap(~Fmonth)+
+  ggsave(file=paste0(here::here(), "/output/LABO_month.jpg"), width = 8, height = 10.5)
+```
+
+![](LABO_results_files/figure-html/graphByMonth-1.png)<!-- -->
+
+
+
+```r
+anim <- map+
+  transition_time(month)+
+  labs(subtitle = 'Month: {frame_time}')+
+  ease_aes('linear')+
+  enter_fade() +
+  exit_fade()
+
+animate(anim, duration = 24, width=1024, height=1024)
+```
+
+![](LABO_results_files/figure-html/graphAnimation-1.gif)<!-- -->
+
+```r
+anim_save(paste0(here::here(), "/output/LABO_anim.gif"))
+```
