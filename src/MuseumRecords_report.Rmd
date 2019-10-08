@@ -89,9 +89,9 @@ anim <- map +
 
 ```
 
-```{r showAnimation, message=FALSE, include=FALSE, progress=F, results='hide', echo=F, fig.keep='all'}
+```{r showAnimation}
 animate(anim, duration = 36, width=1024, height=1024)
 
-# anim_save(paste0(here::here(), "/output/", params$SPP, "_anim.gif"))
+anim_save(paste0(here::here(), "/output/", params$SPP, "_anim.gif"))
 ```
 

@@ -6,10 +6,10 @@ source(paste0(here::here(), "/src/process_GBIFdata.R"))
 
 
 
-# for(thisSPP in c('ALLSPP', "LABO", 'LACI', 'LANO')){
+for(thisSPP in c('ALLSPP', "LABO", 'LACI', 'LANO')){
 
   
-for(thisSPP in c('LANO')){  
+# for(thisSPP in c('LANO')){  
   
 rmarkdown::render(paste0(here::here(), "/src/MuseumRecords_report.Rmd"), 
                   params=list(SPP = thisSPP), 
