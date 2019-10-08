@@ -65,7 +65,7 @@ map_byMonth <- map+facet_wrap(~Fmonth)
 map_byMonth
 ```
 
-```{r graphAnimation, message=FALSE, include=FALSE, progress=F}
+```{r graphAnimation, echo=F}
 # anim <- map+
 #   transition_time(month)+
 #   labs(subtitle = 'Month: {frame_time}')+
@@ -88,7 +88,8 @@ anim <- map +
 
 
 ```
-```{r showAnimation}
+
+```{r showAnimation, message=FALSE, include=FALSE, progress=F, results='hide', echo=F, fig.keep='all'}
 animate(anim, duration = 36, width=1024, height=1024)
 
 # anim_save(paste0(here::here(), "/output/", params$SPP, "_anim.gif"))
