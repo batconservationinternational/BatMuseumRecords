@@ -6,7 +6,7 @@ output:
     keep_md: true
 ---
 
-```{r}
+```{r include=FALSE}
 if(params$SPP == "ALLSPP") commonname <- "All Bat Species"
 if(params$SPP == "LABO") commonname <- "Red Bat"
 if(params$SPP == "LACI") commonname <- "Hoary Bat"
@@ -30,7 +30,7 @@ SPP_df <- readRDS(paste0(here::here(), "/data/processed/", params$SPP, "_records
 ```
 
 
-```{r graphByMonth, echo=F, fig.width=8, fig.height=10.5}
+```{r graphByMonth, include=FALSE}
 wmap <- suppressMessages(ggplot2::map_data('world'))
 
 myBreaks <- function(x){
@@ -55,15 +55,17 @@ map <- ggplot(SPP_df, aes(decimalLongitude, decimalLatitude, group = month)) +
 
 # map
 
-map+
-  facet_wrap(~Fmonth)+
-  ggsave(file=paste0(here::here(), "/output/", params$SPP, "_month.jpg"), width = 8, height = 10.5)
+map_byMonth <- map+facet_wrap(~Fmonth)
 
+ggsave(file=paste0(here::here(), "/output/", params$SPP, "_month.jpg"), width = 8, height = 10.5)
 
 ```
 
+```{r showMonthlyGraph, , fig.height=10.5, fig.width=8, echo=FALSE}
+map_byMonth
+```
 
-```{r graphAnimation, eval=T, echo=F, message=FALSE, include=T, progress=F}
+```{r graphAnimation, message=FALSE, include=FALSE, progress=F}
 # anim <- map+
 #   transition_time(month)+
 #   labs(subtitle = 'Month: {frame_time}')+
@@ -83,8 +85,12 @@ anim <- map +
   enter_fade() +
   exit_fade()
 
+
+
+```
+```{r showAnimation}
 animate(anim, duration = 36, width=1024, height=1024)
 
 anim_save(paste0(here::here(), "/output/", params$SPP, "_anim.gif"))
-
 ```
+

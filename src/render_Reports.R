@@ -3,9 +3,9 @@
 source(paste0(here::here(), "/src/get_GBIFdata.R"))
        
 source(paste0(here::here(), "/src/process_GBIFdata.R"))
-# mySPP="LABO"
+mySPP="LABO"
 
-mySPP = c('ALLSPP', "LABO", 'LACI', 'LANO')
+# mySPP = c('ALLSPP', "LABO", 'LACI', 'LANO')
 
 
 for(thisSPP in mySPP){
