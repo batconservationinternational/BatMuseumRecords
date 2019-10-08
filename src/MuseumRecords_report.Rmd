@@ -1,6 +1,6 @@
 ---
 params:
-  SPP: "ALLSPP"
+  SPP: "LANO"
 output: 
   html_document:
     keep_md: true
