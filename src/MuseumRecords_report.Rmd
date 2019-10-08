@@ -57,11 +57,11 @@ map <- ggplot(SPP_df, aes(decimalLongitude, decimalLatitude, group = month)) +
 
 map_byMonth <- map+facet_wrap(~Fmonth)
 
-ggsave(file=paste0(here::here(), "/output/", params$SPP, "_month.jpg"), width = 8, height = 10.5)
+# ggsave(file=paste0(here::here(), "/output/", params$SPP, "_month.jpg"), width = 8, height = 10.5)
 
 ```
 
-```{r showMonthlyGraph, , fig.height=10.5, fig.width=8, echo=FALSE}
+```{r showMonthlyGraph, fig.height=10.5, fig.width=8, echo=FALSE}
 map_byMonth
 ```
 
@@ -91,6 +91,6 @@ anim <- map +
 ```{r showAnimation}
 animate(anim, duration = 36, width=1024, height=1024)
 
-anim_save(paste0(here::here(), "/output/", params$SPP, "_anim.gif"))
+# anim_save(paste0(here::here(), "/output/", params$SPP, "_anim.gif"))
 ```
 
